@@ -57,8 +57,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 - (void) setupStreamView:(ControllerSupport*)controllerSupport
      interactionDelegate:(id<UserInteractionDelegate>)interactionDelegate
                   config:(StreamConfiguration*)streamConfig {
-    [NativeTouchHandler initializePointerIdDict];
-    [NativeTouchHandler initializePointerIdSet];
+    [TouchPointer initContextWith:self];
     
     self->interactionDelegate = interactionDelegate;
     self->streamAspectRatio = (float)streamConfig.width / (float)streamConfig.height;
@@ -333,9 +332,12 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 
 
 - (void)sendTouchEvent:(UITouch*)event touchType:(uint8_t)touchType{
-    CGPoint location = [self adjustCoordinatesForVideoArea:[event locationInView:self]];
+    CGPoint targetCoords;
+    if(true) targetCoords = [TouchPointer selectCoordsFor:event];
+    else targetCoords = [event locationInView:self];
+    CGPoint location = [self adjustCoordinatesForVideoArea:targetCoords];
     CGSize videoSize = [self getVideoAreaSize];
-    LiSendTouchEvent(touchType,[NativeTouchHandler retrievePointerIdFromDict:event],location.x / videoSize.width, location.y / videoSize.height,(event.force / event.maximumPossibleForce) / sin(event.altitudeAngle),0.0f, 0.0f,[self getRotationFromAzimuthAngle:[event azimuthAngleInView:self]]);
+    LiSendTouchEvent(touchType,[TouchPointer retrievePointerIdFromDict:event],location.x / videoSize.width, location.y / videoSize.height,(event.force / event.maximumPossibleForce) / sin(event.altitudeAngle),0.0f, 0.0f,[self getRotationFromAzimuthAngle:[event azimuthAngleInView:self]]);
 }
 
 
@@ -365,11 +367,13 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     switch (event.phase) {
         case UITouchPhaseBegan://开始触摸
             type = LI_TOUCH_EVENT_DOWN;
-            [NativeTouchHandler populatePointerId:event]; //获取并记录pointerId
+            [TouchPointer populatePointerId:event]; //获取并记录pointerId
+            if(true) [TouchPointer populatePointerObjIntoDict:event];
             break;
         case UITouchPhaseMoved://移动
         case UITouchPhaseStationary:
             type = LI_TOUCH_EVENT_MOVE;
+            if(true) [TouchPointer updatePointerObjInDict:event];
             break;
         case UITouchPhaseRegionEntered://停留
         case UITouchPhaseRegionMoved://停留
@@ -378,17 +382,18 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         case UITouchPhaseCancelled://触摸取消
             type = LI_TOUCH_EVENT_CANCEL;
             [self sendTouchEvent:event touchType:type]; //先发送,再删除
-            [NativeTouchHandler removePointerId:event]; //删除pointerId
+            [TouchPointer removePointerId:event]; //删除pointerId
+            if(true) [TouchPointer removePointerObjFromDict:event];
             return;
         case UITouchPhaseEnded://触摸结束
             type = LI_TOUCH_EVENT_UP;
             [self sendTouchEvent:event touchType:type]; //先发送,再删除
-            [NativeTouchHandler removePointerId:event]; //删除pointerId
+            [TouchPointer removePointerId:event]; //删除pointerId
+            if(true) [TouchPointer removePointerObjFromDict:event];
             return;
         default:
             return;
     }
-
     [self sendTouchEvent:event touchType:type];
 }
 

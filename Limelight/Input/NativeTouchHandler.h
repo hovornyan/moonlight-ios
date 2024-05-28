@@ -10,18 +10,24 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NativeTouchHandler : UIResponder
+@interface TouchPointer : NSObject
 
-+ (NSMutableDictionary* )initializePointerIdDict;
-+ (NSMutableSet* )initializePointerIdSet;
-+ (void)populatePointerId:(UITouch*)event;
-+ (void)removePointerId:(UITouch*)event;
-+ (uint32_t) retrievePointerIdFromDict:(UITouch*)event;
++ (void)initContextWith:(StreamView *)view;
++ (void)populatePointerId:(UITouch*)touch;
++ (void)removePointerId:(UITouch*)touch;
++ (uint32_t) retrievePointerIdFromDict:(UITouch*)touch;
+
++ (void)populatePointerObjIntoDict:(UITouch*)touch;
++ (void)removePointerObjFromDict:(UITouch*)touch;
++ (void)updatePointerObjInDict:(UITouch *)touch;
++ (CGPoint)selectCoordsFor:(UITouch *)touch;
 
 
--(id)initWithView:(StreamView*)view;
-
+- (instancetype)initWith:(UITouch *)touch;
 @end
+
+
+
 
 NS_ASSUME_NONNULL_END
 
