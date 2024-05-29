@@ -34,6 +34,15 @@ StreamView *streamView;
     CGFloat velocityY;
 }
 
++ (void)setPointerVelocityDivider:(CGFloat)dividerLocation{
+    pointerVelocityDivider = dividerLocation;
+}
+
++ (void)setPointerVelocityFactor:(CGFloat)velocityFactor{
+    pointerVelocityFactor = velocityFactor;
+}
+
+
 - (instancetype)initWith:(UITouch *)touch{
         self = [self init];
         self->initialPoint = [touch locationInView:streamView];
@@ -59,7 +68,7 @@ StreamView *streamView;
     pointerIdDict = [NSMutableDictionary dictionary];
     pointerIdSet = [NSMutableSet set];
     pointerDict = [NSMutableDictionary dictionary];
-    pointerVelocityDividerLocation = CGRectGetHeight([[UIScreen mainScreen] bounds]) *pointerVelocityDivider;
+    pointerVelocityDividerLocation = CGRectGetHeight([[UIScreen mainScreen] bounds]) * pointerVelocityDivider;
 }
 
 + (void)populatePointerObjIntoDict:(UITouch*)touch{
@@ -81,11 +90,9 @@ StreamView *streamView;
 
 
 + (CGPoint)selectCoordsFor:(UITouch *)touch{
-    if (pointerVelocityFactor != 1.0f){
-        TouchPointer *pointer = [pointerDict objectForKey:@((uint64_t)touch)];
-        if((pointer -> initialPoint).x > pointerVelocityDividerLocation){
-            return pointer->latestRelativePoint;
-        }
+    TouchPointer *pointer = [pointerDict objectForKey:@((uint64_t)touch)];
+    if((pointer -> initialPoint).x > pointerVelocityDividerLocation){  //if first contact coords locates on the right side of divider.
+        return pointer->latestRelativePoint;
     }
     return [touch locationInView:streamView];
 }

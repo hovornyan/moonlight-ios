@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)populatePointerId:(UITouch*)touch;
 + (void)removePointerId:(UITouch*)touch;
 + (uint32_t) retrievePointerIdFromDict:(UITouch*)touch;
-
++ (void)setPointerVelocityDivider:(CGFloat)dividerLocation;
++ (void)setPointerVelocityFactor:(CGFloat)velocityFactor;
 + (void)populatePointerObjIntoDict:(UITouch*)touch;
 + (void)removePointerObjFromDict:(UITouch*)touch;
 + (void)updatePointerObjInDict:(UITouch *)touch;

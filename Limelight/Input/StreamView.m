@@ -57,12 +57,14 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 - (void) setupStreamView:(ControllerSupport*)controllerSupport
      interactionDelegate:(id<UserInteractionDelegate>)interactionDelegate
                   config:(StreamConfiguration*)streamConfig {
-    [TouchPointer initContextWith:self];
     
     self->interactionDelegate = interactionDelegate;
     self->streamAspectRatio = (float)streamConfig.width / (float)streamConfig.height;
     
     settings = [[[DataManager alloc] init] getSettings];
+    [TouchPointer initContextWith:self];
+    [TouchPointer setPointerVelocityDivider:settings.pointerVelocityModeDivider.floatValue];
+    [TouchPointer setPointerVelocityFactor:settings.touchPointerVelocityFactor.floatValue];
     
     keysDown = [[NSMutableSet alloc] init];
     keyInputField = [[KeyboardInputField alloc] initWithFrame:CGRectZero];
@@ -333,7 +335,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 
 - (void)sendTouchEvent:(UITouch*)event touchType:(uint8_t)touchType{
     CGPoint targetCoords;
-    if(true) targetCoords = [TouchPointer selectCoordsFor:event];
+    if(settings.pointerVelocityModeDivider.floatValue != 1.0) targetCoords = [TouchPointer selectCoordsFor:event]; // coordinates of touch pointer replaced to relative ones here.
     else targetCoords = [event locationInView:self];
     CGPoint location = [self adjustCoordinatesForVideoArea:targetCoords];
     CGSize videoSize = [self getVideoAreaSize];
@@ -343,6 +345,8 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 
 - (void)handleUITouch:(UITouch*)event index:(int)index{
     uint8_t type;
+    BOOL pointerVelocityScaleEnabled = (settings.pointerVelocityModeDivider.floatValue != 1.0); // when the divider is 1.0, means 0% of screen shall pass velocity-scaled pointer to sunshine.
+    
     // NSLog(@"handleUITouch %ld,%d",(long)event.phase,(uint32_t)event);
 //#define LI_TOUCH_EVENT_HOVER       0x00
 //#define LI_TOUCH_EVENT_DOWN        0x01
@@ -368,12 +372,12 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         case UITouchPhaseBegan://开始触摸
             type = LI_TOUCH_EVENT_DOWN;
             [TouchPointer populatePointerId:event]; //获取并记录pointerId
-            if(true) [TouchPointer populatePointerObjIntoDict:event];
+            if(pointerVelocityScaleEnabled) [TouchPointer populatePointerObjIntoDict:event];
             break;
         case UITouchPhaseMoved://移动
         case UITouchPhaseStationary:
             type = LI_TOUCH_EVENT_MOVE;
-            if(true) [TouchPointer updatePointerObjInDict:event];
+            if(pointerVelocityScaleEnabled) [TouchPointer updatePointerObjInDict:event];
             break;
         case UITouchPhaseRegionEntered://停留
         case UITouchPhaseRegionMoved://停留
@@ -383,13 +387,13 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
             type = LI_TOUCH_EVENT_CANCEL;
             [self sendTouchEvent:event touchType:type]; //先发送,再删除
             [TouchPointer removePointerId:event]; //删除pointerId
-            if(true) [TouchPointer removePointerObjFromDict:event];
+            if(pointerVelocityScaleEnabled) [TouchPointer removePointerObjFromDict:event];
             return;
         case UITouchPhaseEnded://触摸结束
             type = LI_TOUCH_EVENT_UP;
             [self sendTouchEvent:event touchType:type]; //先发送,再删除
             [TouchPointer removePointerId:event]; //删除pointerId
-            if(true) [TouchPointer removePointerObjFromDict:event];
+            if(pointerVelocityScaleEnabled) [TouchPointer removePointerObjFromDict:event];
             return;
         default:
             return;

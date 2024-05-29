@@ -90,6 +90,8 @@
     self.swipeToExitDistance = settings.swipeToExitDistance;
     self.liftStreamViewForKeyboard = settings.liftStreamViewForKeyboard;
     self.showKeyboardToolbar = settings.showKeyboardToolbar;
+    self.touchPointerVelocityFactor = settings.touchPointerVelocityFactor;
+    self.pointerVelocityModeDivider = settings.pointerVelocityModeDivider;
 #endif
     self.uniqueId = settings.uniqueId;
     

@@ -61,6 +61,8 @@
            keyboardToggleFingers:(NSInteger)keyboardToggleFingers
              swipeExitScreenEdge:(NSInteger)swipeExitScreenEdge
              swipeToExitDistance:(CGFloat)swipeToExitDistance
+      pointerVelocityModeDivider:(CGFloat)pointerVelocityModeDivider
+      touchPointerVelocityFactor:(CGFloat)touchPointerVelocityFactor
        liftStreamViewForKeyboard:(BOOL)liftStreamViewForKeyboard
              showKeyboardToolbar:(BOOL)showKeyboardToolbar
                    optimizeGames:(BOOL)optimizeGames
@@ -85,6 +87,8 @@
         settingsToSave.keyboardToggleFingers = [NSNumber numberWithInteger:(uint16_t)keyboardToggleFingers];
         settingsToSave.swipeExitScreenEdge = [NSNumber numberWithInteger:(uint32_t)swipeExitScreenEdge];
         settingsToSave.swipeToExitDistance = [NSNumber numberWithFloat:swipeToExitDistance];
+        settingsToSave.pointerVelocityModeDivider = [NSNumber numberWithFloat:pointerVelocityModeDivider];
+        settingsToSave.touchPointerVelocityFactor = [NSNumber numberWithFloat:touchPointerVelocityFactor];
         settingsToSave.liftStreamViewForKeyboard = liftStreamViewForKeyboard;
         settingsToSave.showKeyboardToolbar = showKeyboardToolbar;
         settingsToSave.optimizeGames = optimizeGames;

@@ -275,6 +275,22 @@ BOOL isCustomResolution(CGSize res) {
     [self.swipeToExitDistanceSlider setValue:(CGFloat)currentSettings.swipeToExitDistance.floatValue animated:YES]; // Load old setting.
     [self.swipeToExitDistanceUILabel setText:[NSString stringWithFormat:@"Swipe & Exit Distance: %.2f * screen-width", self.swipeToExitDistanceSlider.value]]; // Initiate label display
     [self.swipeToExitDistanceSlider addTarget:self action:@selector(swipeToExitDistanceSliderMoved) forControlEvents:(UIControlEventValueChanged)]; // Update label display when slider is being moved.
+    
+    [self.pointerVelocityModeDividerSlider setValue:currentSettings.pointerVelocityModeDivider.floatValue * 100 animated:YES]; // Load old setting.
+    [self.pointerVelocityModeDividerUILabel setText:[NSString stringWithFormat:@"Touch Pointer Velocity: Scaled on %d%% of Right Screen", 100 - (uint8_t)self.pointerVelocityModeDividerSlider.value]]; // Initiate label display
+    [self.pointerVelocityModeDividerSlider addTarget:self action:@selector(pointerVelocityModeDividerSliderMoved) forControlEvents:(UIControlEventValueChanged)]; // Update label display when slider is being moved.
+    
+    [self.touchPointerVelocityFactorSlider setValue:currentSettings.touchPointerVelocityFactor.floatValue * 100 animated:YES]; // Load old setting.
+    [self.touchPointerVelocityFactorUILabel setText:[NSString stringWithFormat:@"Touch Pointer Velocity Factor: %d%%", (uint16_t)self.touchPointerVelocityFactorSlider.value]]; // Initiate label display
+    [self.touchPointerVelocityFactorSlider addTarget:self action:@selector(touchPointerVelocityFactorSliderMoved) forControlEvents:(UIControlEventValueChanged)]; // Update label display when slider is being moved.
+}
+
+- (void) pointerVelocityModeDividerSliderMoved {
+    [self.pointerVelocityModeDividerUILabel setText:[NSString stringWithFormat:@"Touch Pointer Velocity: Scaled on %d%% of Right Screen", 100 - (uint8_t)self.pointerVelocityModeDividerSlider.value]];
+}
+
+- (void) touchPointerVelocityFactorSliderMoved {
+    [self.touchPointerVelocityFactorUILabel setText:[NSString stringWithFormat:@"Touch Pointer Velocity Factor: %d%%", (uint16_t)self.touchPointerVelocityFactorSlider.value]]; // Initiate label display
 }
 
 - (uint32_t) getScreenEdgeFromSelector {
@@ -300,6 +316,8 @@ BOOL isCustomResolution(CGSize res) {
 - (void) touchModeChanged {
     // Disable on-screen controls in absolute touch mode
     [self.onscreenControlSelector setEnabled:[self.touchModeSelector selectedSegmentIndex] == 0];
+    [self.pointerVelocityModeDividerSlider setEnabled:[self.touchModeSelector selectedSegmentIndex] == 1]; // pointer velocity scaling works only in native touch mode.
+    [self.touchPointerVelocityFactorSlider setEnabled:[self.touchModeSelector selectedSegmentIndex] == 1]; // pointer velocity scaling works only in native touch mode.
 }
 
 - (void) updateBitrate {
@@ -573,6 +591,8 @@ BOOL isCustomResolution(CGSize res) {
     // NSLog(@"saveSettings keyboardToggleFingers  %d", (uint16_t)keyboardToggleFingers);
     CGFloat swipeToExitDistance = self.swipeToExitDistanceSlider.value;
     uint32_t swipeExitScreenEdge = [self getScreenEdgeFromSelector];
+    CGFloat pointerVelocityModeDivider = (CGFloat)(uint8_t)self.pointerVelocityModeDividerSlider.value/100;
+    CGFloat touchPointerVelocityFactor =(CGFloat)(uint16_t)self.touchPointerVelocityFactorSlider.value/100;
     BOOL liftStreamViewForKeyboard = [self.liftStreamViewForKeyboardSelector selectedSegmentIndex] == 1;
     BOOL showKeyboardToolbar = [self.showKeyboardToolbarSelector selectedSegmentIndex] == 1;
     BOOL optimizeGames = [self.optimizeSettingsSelector selectedSegmentIndex] == 1;
@@ -594,6 +614,8 @@ BOOL isCustomResolution(CGSize res) {
                keyboardToggleFingers:keyboardToggleFingers
                  swipeExitScreenEdge:swipeExitScreenEdge
                  swipeToExitDistance:swipeToExitDistance
+          pointerVelocityModeDivider:pointerVelocityModeDivider
+          touchPointerVelocityFactor:touchPointerVelocityFactor
            liftStreamViewForKeyboard:liftStreamViewForKeyboard
                  showKeyboardToolbar:showKeyboardToolbar
                        optimizeGames:optimizeGames
