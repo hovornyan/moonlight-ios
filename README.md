@@ -29,7 +29,9 @@ Feel free to merge the code, whether publicly or privately. However, if you find
   ### The most welcomed "touch pointer velocity (sensitivity) tweak" feature, which was first implemented on my Moonlight-Android fork, is now available on iOS version. <br>
   ![image](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/48d3f5c3-775c-48ed-8fee-41ea4eece12d)
    <br> 触点在屏幕右边生成时， 其移动速度将按设定值缩放， 在剩下的左边屏幕区域则直接透传触点坐标。透传区与调整区的分割位置可调。
-   <br> The pointer velocity tweak zone is on the right side of screen with configurable width, while on the rest part of screen, original coordinates of pointer will be passed through to the remote PC.
+   <br> The pointer velocity tweak zone is on the right side of screen with configurable width, while on the rest part of screen, original coordinates of pointer will be passed through to the remote PC.<br>
+![testt6](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/d40339be-dcad-4866-b8f0-ff3da310cd25)
+
    <br><br>
    
 
