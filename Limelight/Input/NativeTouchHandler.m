@@ -18,8 +18,8 @@ static NSMutableDictionary *pointerIdDict; //pointerId Dict for native touch.
 static NSMutableSet<NSNumber *> *pointerIdSet; //pointerIdSet for native touch.
 static NSMutableDictionary *pointerDict;
 
-static CGFloat pointerVelocityFactor = 0.7;
-static CGFloat pointerVelocityDivider = 0.5;
+static CGFloat pointerVelocityFactor;
+static CGFloat pointerVelocityDivider;
 static CGFloat pointerVelocityDividerLocation;
 
 StreamView *streamView;
@@ -68,7 +68,9 @@ StreamView *streamView;
     pointerIdDict = [NSMutableDictionary dictionary];
     pointerIdSet = [NSMutableSet set];
     pointerDict = [NSMutableDictionary dictionary];
-    pointerVelocityDividerLocation = CGRectGetHeight([[UIScreen mainScreen] bounds]) * pointerVelocityDivider;
+    pointerVelocityDividerLocation = CGRectGetWidth([[UIScreen mainScreen] bounds]) * pointerVelocityDivider;
+    NSLog(@"pointerVelocityDivider:  %.2f", pointerVelocityDivider);
+    NSLog(@"pointerVelocityDividerLocation:  %.2f", pointerVelocityDividerLocation);
 }
 
 + (void)populatePointerObjIntoDict:(UITouch*)touch{

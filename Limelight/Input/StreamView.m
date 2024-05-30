@@ -62,9 +62,9 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     self->streamAspectRatio = (float)streamConfig.width / (float)streamConfig.height;
     
     settings = [[[DataManager alloc] init] getSettings];
-    [TouchPointer initContextWith:self];
     [TouchPointer setPointerVelocityDivider:settings.pointerVelocityModeDivider.floatValue];
     [TouchPointer setPointerVelocityFactor:settings.touchPointerVelocityFactor.floatValue];
+    [TouchPointer initContextWith:self];
     
     keysDown = [[NSMutableSet alloc] init];
     keyInputField = [[KeyboardInputField alloc] initWithFrame:CGRectZero];
@@ -335,7 +335,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 
 - (void)sendTouchEvent:(UITouch*)event touchType:(uint8_t)touchType{
     CGPoint targetCoords;
-    if(settings.pointerVelocityModeDivider.floatValue != 1.0) targetCoords = [TouchPointer selectCoordsFor:event]; // coordinates of touch pointer replaced to relative ones here.
+    if(settings.pointerVelocityModeDivider.floatValue != 1.0 && event.phase == UITouchPhaseMoved) targetCoords = [TouchPointer selectCoordsFor:event]; // coordinates of touch pointer replaced to relative ones here.
     else targetCoords = [event locationInView:self];
     CGPoint location = [self adjustCoordinatesForVideoArea:targetCoords];
     CGSize videoSize = [self getVideoAreaSize];
