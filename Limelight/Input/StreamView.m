@@ -62,9 +62,6 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     self->streamAspectRatio = (float)streamConfig.width / (float)streamConfig.height;
     
     settings = [[[DataManager alloc] init] getSettings];
-    [TouchPointer setPointerVelocityDivider:settings.pointerVelocityModeDivider.floatValue];
-    [TouchPointer setPointerVelocityFactor:settings.touchPointerVelocityFactor.floatValue];
-    [TouchPointer initContextWith:self];
     
     keysDown = [[NSMutableSet alloc] init];
     keyInputField = [[KeyboardInputField alloc] initWithFrame:CGRectZero];
@@ -97,7 +94,10 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 #else
     // iOS uses RelativeTouchHandler or AbsoluteTouchHandler depending on user preference
     if (settings.absoluteTouchMode) {
-        self->touchHandler = [[AbsoluteTouchHandler alloc] initWithView:self];
+        // self->touchHandler = [[AbsoluteTouchHandler alloc] initWithView:self];
+        [TouchPointer setPointerVelocityDivider:settings.pointerVelocityModeDivider.floatValue];
+        [TouchPointer setPointerVelocityFactor:settings.touchPointerVelocityFactor.floatValue];
+        [TouchPointer initContextWith:self];
     }
     else {
         self->touchHandler = [[RelativeTouchHandler alloc] initWithView:self];
@@ -345,8 +345,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 
 - (void)handleUITouch:(UITouch*)event index:(int)index{
     uint8_t type;
-    BOOL pointerVelocityScaleEnabled = (settings.pointerVelocityModeDivider.floatValue != 1.0); // when the divider is 1.0, means 0% of screen shall pass velocity-scaled pointer to sunshine.
-    
+    //BOOL pointerVelocityScaleEnabled = (settings.pointerVelocityModeDivider.floatValue != 1.0); // when the divider is 1.0, means 0% of screen shall pass velocity-scaled pointer to sunshine.
     // NSLog(@"handleUITouch %ld,%d",(long)event.phase,(uint32_t)event);
 //#define LI_TOUCH_EVENT_HOVER       0x00
 //#define LI_TOUCH_EVENT_DOWN        0x01
@@ -357,7 +356,6 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 //#define LI_TOUCH_EVENT_HOVER_LEAVE 0x06
 //#define LI_TOUCH_EVENT_CANCEL_ALL  0x07
 //#define LI_ROT_UNKNOWN 0xFFFF
-    
     
 //    UITouchPhaseBegan,             // whenever a finger touches the surface.
 //    UITouchPhaseMoved,             // whenever a finger moves on the surface.
@@ -372,29 +370,29 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         case UITouchPhaseBegan://开始触摸
             type = LI_TOUCH_EVENT_DOWN;
             [TouchPointer populatePointerId:event]; //获取并记录pointerId
-            if(pointerVelocityScaleEnabled) [TouchPointer populatePointerObjIntoDict:event];
+            if(settings.pointerVelocityModeDivider.floatValue != 1.0) [TouchPointer populatePointerObjIntoDict:event];
             break;
         case UITouchPhaseMoved://移动
         case UITouchPhaseStationary:
             type = LI_TOUCH_EVENT_MOVE;
-            if(pointerVelocityScaleEnabled) [TouchPointer updatePointerObjInDict:event];
+            if(settings.pointerVelocityModeDivider.floatValue != 1.0) [TouchPointer updatePointerObjInDict:event];
             break;
-        case UITouchPhaseRegionEntered://停留
-        case UITouchPhaseRegionMoved://停留
-            type = LI_TOUCH_EVENT_HOVER;
-            break;
-        case UITouchPhaseCancelled://触摸取消
-            type = LI_TOUCH_EVENT_CANCEL;
-            [self sendTouchEvent:event touchType:type]; //先发送,再删除
-            [TouchPointer removePointerId:event]; //删除pointerId
-            if(pointerVelocityScaleEnabled) [TouchPointer removePointerObjFromDict:event];
-            return;
         case UITouchPhaseEnded://触摸结束
             type = LI_TOUCH_EVENT_UP;
             [self sendTouchEvent:event touchType:type]; //先发送,再删除
             [TouchPointer removePointerId:event]; //删除pointerId
-            if(pointerVelocityScaleEnabled) [TouchPointer removePointerObjFromDict:event];
+            if(settings.pointerVelocityModeDivider.floatValue != 1.0) [TouchPointer removePointerObjFromDict:event];
             return;
+        case UITouchPhaseCancelled://触摸取消
+            type = LI_TOUCH_EVENT_CANCEL;
+            [self sendTouchEvent:event touchType:type]; //先发送,再删除
+            [TouchPointer removePointerId:event]; //删除pointerId
+            if(settings.pointerVelocityModeDivider.floatValue != 1.0) [TouchPointer removePointerObjFromDict:event];
+            return;
+        case UITouchPhaseRegionEntered://停留
+        case UITouchPhaseRegionMoved://停留
+            type = LI_TOUCH_EVENT_HOVER;
+            break;
         default:
             return;
     }
@@ -482,17 +480,6 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 #endif
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if ([self handleMouseButtonEvent:BUTTON_ACTION_PRESS
-                          forTouches:touches
-                           withEvent:event]) {
-        // If it's a mouse event, we're done
-        return;
-    }
-    
-    Log(LOG_D, @"Touch down");
-    
-    // Notify of user interaction and start expiration timer
-    [self startInteractionTimer];
     
 #if !TARGET_OS_TV
     if (@available(iOS 13.4, *)) {
@@ -512,22 +499,32 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         //                return;
         //            }
         //        }
-        for (UITouch* touch in touches) {
-            if (touch.type == UITouchTypePencil) {
-                if ([self sendStylusEvent:touch]) {
-                    return;
+        
+        if (settings.absoluteTouchMode) {
+            for (UITouch* touch in touches) [self handleUITouch:touch index:0];// Native touch (absoluteTouch) first!
+            return;
+        }
+        else{
+            for (UITouch* touch in touches) {
+                if (touch.type == UITouchTypePencil) {
+                    if ([self sendStylusEvent:touch]) return;
                 }
-            }
-            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
-            if (settings.absoluteTouchMode) {
-                [self handleUITouch:touch index:0];
-                
-                //                return;
             }
         }
         // NSLog(@"touchesBegan - allTouches %lu, pointerSet count %lu",[[event allTouches] count], [pointerIdSet count]);
     }
 #endif
+    if ([self handleMouseButtonEvent:BUTTON_ACTION_PRESS
+                          forTouches:touches
+                           withEvent:event]) {
+        // If it's a mouse event, we're done
+        return;
+    }
+    
+    Log(LOG_D, @"Touch down");
+    
+    // Notify of user interaction and start expiration timer
+    [self startInteractionTimer];
     
     if (![onScreenControls handleTouchDownEvent:touches]) {
         // We still inform the touch handler even if we're going trigger the
@@ -662,18 +659,18 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 #if !TARGET_OS_TV
     if (@available(iOS 13.4, *)) {
-        for (UITouch* touch in touches) {
-            if (touch.type == UITouchTypePencil) {
-                if ([self sendStylusEvent:touch]) {
-                    return;
+        if (settings.absoluteTouchMode) {
+            for (UITouch* touch in touches) [self handleUITouch:touch index:0];// Native touch (absoluteTouch) first!
+            return;
+        }
+        else{
+            for (UITouch* touch in touches) {
+                if (touch.type == UITouchTypePencil) {
+                    if ([self sendStylusEvent:touch]) return;
                 }
             }
-            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
-            if (settings.absoluteTouchMode) {
-                [self handleUITouch:touch index:0];
-                //                return;
-            }
         }
+        
         // NSLog(@"touchesMoved - allTouches %lu, pointerSet count %lu",[[event allTouches] count], [pointerIdSet count]);
         UITouch *touch = [touches anyObject];
         if (touch.type == UITouchTypeIndirectPointer) {
@@ -742,6 +739,22 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+#if !TARGET_OS_TV
+    if (@available(iOS 13.4, *)) {
+        if (settings.absoluteTouchMode) {
+            for (UITouch* touch in touches) [self handleUITouch:touch index:0];// Native touch (absoluteTouch) first!
+            return;
+        }
+        else{
+            for (UITouch* touch in touches) {
+                if (touch.type == UITouchTypePencil) {
+                    if ([self sendStylusEvent:touch]) return;
+                }
+            }
+        }
+        // NSLog(@"touchesEnded - allTouches %lu, pointerSet count %lu",[[event allTouches] count], [pointerIdSet count]);
+    }
+#endif
     if ([self handleMouseButtonEvent:BUTTON_ACTION_RELEASE
                           forTouches:touches
                            withEvent:event]) {
@@ -753,24 +766,6 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
     
     hasUserInteracted = YES;
     
-#if !TARGET_OS_TV
-    if (@available(iOS 13.4, *)) {
-        for (UITouch* touch in touches) {
-            if (touch.type == UITouchTypePencil) {
-                if ([self sendStylusEvent:touch]) {
-                    return;
-                }
-            }
-            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
-            if (settings.absoluteTouchMode) {
-                [self handleUITouch:touch index:0];
-//                return;
-            }
-        }
-        // NSLog(@"touchesEnded - allTouches %lu, pointerSet count %lu",[[event allTouches] count], [pointerIdSet count]);
-    }
-#endif
-    
     if (![onScreenControls handleTouchUpEvent:touches]) {
         [touchHandler touchesEnded:touches withEvent:event];
     }
@@ -778,24 +773,25 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     [touchHandler touchesCancelled:touches withEvent:event];
+#if !TARGET_OS_TV
+    if (@available(iOS 13.4, *)) {
+        if (settings.absoluteTouchMode) {
+            for (UITouch* touch in touches) [self handleUITouch:touch index:0];// Native touch (absoluteTouch) first!
+            return;
+        }
+        else{
+            for (UITouch* touch in touches) {
+                if (touch.type == UITouchTypePencil) {
+                    if ([self sendStylusEvent:touch]) return;
+                }
+            }
+        }
+    }
+        // NSLog(@"touchesCancelled - allTouches %lu, pointerSet count %lu",[[event allTouches] count], [pointerIdSet count]);
+#endif
     [self handleMouseButtonEvent:BUTTON_ACTION_RELEASE
                       forTouches:touches
                        withEvent:event];
-#if !TARGET_OS_TV
-    if (@available(iOS 13.4, *)) {
-        for (UITouch* touch in touches) {
-            if (touch.type == UITouchTypePencil) {
-                [self sendStylusEvent:touch];
-            }
-            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
-            if (settings.absoluteTouchMode) {
-                [self handleUITouch:touch index:0];
-//                return;
-            }
-        }
-        // NSLog(@"touchesCancelled - allTouches %lu, pointerSet count %lu",[[event allTouches] count], [pointerIdSet count]);
-    }
-#endif
 }
 
 #if !TARGET_OS_TV
