@@ -506,7 +506,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
         //                return;
         //
         //            }
-        //            TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
+        //            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
         //            if (settings.absoluteTouchMode) {
         //                [self handleUITouch:arr1[i] index:i];
         //                return;
@@ -518,7 +518,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
                     return;
                 }
             }
-            TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
+            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
             if (settings.absoluteTouchMode) {
                 [self handleUITouch:touch index:0];
                 
@@ -668,7 +668,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
                     return;
                 }
             }
-            TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
+            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
             if (settings.absoluteTouchMode) {
                 [self handleUITouch:touch index:0];
                 //                return;
@@ -761,7 +761,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
                     return;
                 }
             }
-            TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
+            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
             if (settings.absoluteTouchMode) {
                 [self handleUITouch:touch index:0];
 //                return;
@@ -787,7 +787,7 @@ static const double X1_MOUSE_SPEED_DIVISOR = 2.5;
             if (touch.type == UITouchTypePencil) {
                 [self sendStylusEvent:touch];
             }
-            TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
+            // TemporarySettings* settings = [[[DataManager alloc] init] getSettings];
             if (settings.absoluteTouchMode) {
                 [self handleUITouch:touch index:0];
 //                return;
