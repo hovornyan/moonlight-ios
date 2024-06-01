@@ -106,7 +106,7 @@ StreamView *streamView;
 + (void)populatePointerId:(UITouch*)touch{
     uint64_t eventAddrValue = (uint64_t)touch;
     uint32_t randomPointerId = arc4random_uniform(UINT32_MAX); // generate pointerId from eletronic noise.
-    while(true){
+    for(;;){
         if([pointerIdSet containsObject:@(randomPointerId)]) randomPointerId = arc4random_uniform(UINT32_MAX); // in case of new pointerId collides with existing ones, generate again.
         else{ // populate pointerId into NSDict & NSSet.
             [pointerIdDict setObject:@(randomPointerId) forKey:@(eventAddrValue)];
