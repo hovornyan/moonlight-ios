@@ -30,6 +30,14 @@ Feature list on this page will not be updated anymore, please check the release 
 <br>
 
 # 主要特性 Feature List 20240526
+
+- ### 无BUG、健壮的多点触控透传.
+  ### Robust, BUG-FREE 10-finger Native Touch Pass-Through.
+   经过持续的优化， 多点触透传机制已经非常可靠。
+   <br>After subsequent optimizations, the multi-touch pass-through mechanism has become very reliable.<br>
+![testt5](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/46af86e8-ef69-4923-a36b-0a7b54856b22)
+   <br><br>
+
 - ### 由本人在moonlight-android上首创、最受欢迎的触点调速(即灵敏度调节)功能已在iOS上实现。
   ### The most welcomed "touch pointer velocity (sensitivity) tweak" feature, which was first implemented on my Moonlight-Android fork, is now available on iOS version. <br>
   ![image](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/48d3f5c3-775c-48ed-8fee-41ea4eece12d)
@@ -38,7 +46,6 @@ Feature list on this page will not be updated anymore, please check the release 
 ![testt6](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/d40339be-dcad-4866-b8f0-ff3da310cd25)
 
    <br><br>
-   
 
 - ### 首创唤醒键盘时，抬起串流界面，保证输入区域不被键盘遮挡。
   ### First implemented stream view lifting for local keyboard, prevent remote typing view from being blocked by local keyboard:
@@ -56,15 +63,6 @@ Feature list on this page will not be updated anymore, please check the release 
   ![image](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/88a2eca7-dbbc-46c8-a60e-065a7f44b9fa)
    <br><br>
 
- 
-- ### 健壮的多点触控透传。
-  ### Robust Multi-Touch Pass-Through.
-   经过早期Bug修复和后续优化， 多点触透传机制已经非常可靠。
-   <br>After early bug fixes and subsequent optimizations, the multi-touch pass-through mechanism has become very reliable.<br>
-![testt5](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/46af86e8-ef69-4923-a36b-0a7b54856b22)
-   <br><br>
-
-
 
 - ### 重构退出会话手势识别，防止意外退出。
   ### Refactored Session Exit Gesture Recognition to Prevent Accidental Exits.
@@ -74,7 +72,6 @@ Feature list on this page will not be updated anymore, please check the release 
 ![image](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/b2fec7b0-c82a-4bca-aec2-0620f5185b2e)
 ![longSwipeToExit](https://github.com/TrueZhuangJia/moonlight-ios-NativeMultiTouchPassthrough/assets/78474576/a177b3e6-9b28-4274-b1b9-e4011a8caf86)
    <br><br>
-
 
 
 - ### 重构键盘切换手势识别，实现可靠本地输入法键盘唤醒、关闭。
