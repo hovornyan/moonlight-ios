@@ -14,7 +14,11 @@ Feel free to merge the code, whether publicly or privately. However, if you find
 功能说明清单请前往Release页面查看, 本页面不再更新。<br>
 Latest changes of coding will be committed to branch: PointerVelocityTweak-ResetReadme. <br>
 Feature list on this page will not be updated anymore, please check the release page for details.
- 
+
+# 视频介绍, A Video illutration in Chinese:<br>
+https://www.bilibili.com/video/BV1M1421C7FD
+  <br> <br>
+  
 
 # Fork缘由
 
