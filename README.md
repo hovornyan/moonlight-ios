@@ -13,7 +13,7 @@ Feature list on this page will not be updated anymore, please check the release 
  <br> <br>
 
 # 为防范抄袭狗Up主 "阿西西的日常" ，最新的代码提交暂未公开<br>
-# To prevent plagiarism by copycat '阿西西的日常 (Axixi's Daily Life)', the latest code submissions are not currently public
+# To prevent plagiarism by copycat "阿西西的日常 (Axixi's Daily Life)", the latest code submissions are not currently public
 【"阿西西的日常" : 游戏串流界小偷、假大佬、毒瘤up主】 https://b23.tv/Z0ChSiD<br>
  <br> <br>
 
