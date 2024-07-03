@@ -2,21 +2,20 @@
 
 # 适用范围 Applies to
 
-适用有强烈多点触控串流游戏需求的玩家, 尤其是米家自带原生触屏UI的游戏。 作为资深搓屏党一员，我认为自己对这种玩法的需求判断是准确的。具体请看主要特性列表。 <br>
-Players who have a strong demand for multi-touch streaming games, especially those who play Mihoyo games with built-in native touchscreen UI . As a senior player of the "touch screen club", I believe my judgment of  requirements to this kind of gameplay is accurate. Please see the feature list for details.
+Game play, general remote desktop application.
  <br>
 
 # 注意事项 Notice
 欢迎公开或非公开的代码合并，但如果觉得这个Fork好用，或对自己有所启发， 请记得点星。不要一声不响地合并或模仿并视为自己的原创。如果能够声明引用这个Fork的改动，我将非常感谢。<br>
-Feel free to merge the code, whether publicly or privately. However, if you find this fork useful or inspiring, please remember to give it a star. I would greatly appreciate if you could mention the changes made to your own build originated from this fork.
+Feel free to merge the code (by mentioning my credits). If you find this fork useful or inspiring, please remember to give it a star.<br><br>
+功能说明清单、最新IPA文件下载，请前往Release页面查看, 本页面不再更新。<br>
+Feature list on this page will not be updated anymore, please check the release page for details and latest IPA download.
  <br> <br>
 
 # 为防范抄袭狗Up主 "阿西西的日常" ，最新的代码提交暂未公开<br>
 # To prevent plagiarism by copycat '阿西西的日常 (Axixi's Daily Life)', the latest code submissions are not currently public
 【"阿西西的日常" : 游戏串流界小偷、假大佬、毒瘤up主】 https://b23.tv/Z0ChSiD<br>
-
-功能说明清单、最新IPA文件下载，请前往Release页面查看, 本页面不再更新。<br>
-Feature list on this page will not be updated anymore, please check the release page for details and latest IPA download.
+ <br> <br>
 
 # 视频介绍, A Video illutration in Chinese:<br>
 https://www.bilibili.com/video/BV1M1421C7FD
