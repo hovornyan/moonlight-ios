@@ -874,15 +874,32 @@ static NSMutableSet* hostList;
 }
 
 #if !TARGET_OS_TV
-- (void)simulateSettingsButtonPressOpen { //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
+- (void)simulateSettingsButtonPressOpen { //force expand settings view to update resolution table, will be called by settingsViewController
     if (currentPosition == FrontViewPositionLeft && _settingsButton.target && [_settingsButton.target respondsToSelector:_settingsButton.action]) {
         [_settingsButton.target performSelector:_settingsButton.action withObject:_settingsButton];
     }
 }
 
 - (void)simulateSettingsButtonPress { //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
-    if (_settingsButton.target && [_settingsButton.target respondsToSelector:_settingsButton.action]) {
-        [_settingsButton.target performSelector:_settingsButton.action withObject:_settingsButton];
+    bool pressButton = true;
+    UIDeviceOrientation currentDeviceOrientaion = [UIDevice currentDevice].orientation;
+    if(UIDeviceOrientationIsFlat(currentDeviceOrientaion)) pressButton = false;
+    if(UIDeviceOrientationIsPortrait(currentDeviceOrientaion) && !UIDeviceOrientationIsPortrait(_recordedOrientation) && !UIDeviceOrientationIsFlat(_recordedOrientation)) pressButton = true;
+    else pressButton = false;
+    if(UIDeviceOrientationIsLandscape(currentDeviceOrientaion) && !UIDeviceOrientationIsLandscape(_recordedOrientation) && !UIDeviceOrientationIsFlat(_recordedOrientation)) pressButton = true;
+    else pressButton = false;
+    _recordedOrientation = currentDeviceOrientaion;
+    if(pressButton) {
+        [self simulateSettingsButtonPressOpen];
+        double delayInSeconds = 1.0;
+        // Convert the delay into a dispatch_time_t value
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        // Perform some task after the delay
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            // Code to execute after the delay
+            NSLog(@"Resolution table to be updated");
+            //[self updateResolutionTable];
+        });
     }
 }
 
@@ -1158,6 +1175,8 @@ static NSMutableSet* hostList;
                                                object:nil];
 
     [[self revealViewController] setPrimaryViewController:self];
+    
+    _recordedOrientation = [UIDevice currentDevice].orientation;
 #endif
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
