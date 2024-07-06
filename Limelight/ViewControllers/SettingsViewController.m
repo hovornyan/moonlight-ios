@@ -179,13 +179,6 @@ BOOL isCustomResolution(CGSize res) {
     });
 }
 
-
-#pragma mark - PressSettingButtonDelegate
-- (void)settingButtonPressedInMainFrame{
-    NSLog(@"setting button pressed in main frame");
-}
-
-
 - (void)simulateSettingsButtonPress{
     [self.mainFrameViewController simulateSettingsButtonPress];
 }
@@ -198,7 +191,6 @@ BOOL isCustomResolution(CGSize res) {
                                                object:nil];
     
     // for iphones that can not reach mainFrame, to register a gesture to simuluate setting button press & exit from setting view.
-    self.mainFrameViewController.delegate = self;
     _exitSwipeRecognizer = [[CustomEdgeSwipeGestureRecognizer alloc] initWithTarget:self action:@selector(simulateSettingsButtonPress)];
     _exitSwipeRecognizer.edges = UIRectEdgeLeft | UIRectEdgeRight;
     _exitSwipeRecognizer.normalizedThresholdDistance = 0;

@@ -883,12 +883,6 @@ static NSMutableSet* hostList;
 - (void)simulateSettingsButtonPress { //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
     if (_settingsButton.target && [_settingsButton.target respondsToSelector:_settingsButton.action]) {
         [_settingsButton.target performSelector:_settingsButton.action withObject:_settingsButton];
-        NSLog(@"Delegate: %@", self.delegate);
-
-        
-        if ([self.delegate respondsToSelector:@selector(settingButtonPressedInMainFrame)]) {
-            [self.delegate settingButtonPressedInMainFrame];
-        }
     }
 }
 

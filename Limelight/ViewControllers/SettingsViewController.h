@@ -12,7 +12,7 @@
 #import "MainFrameViewController.h"
 #import "CustomEdgeSwipeGestureRecognizer.h"
 
-@interface SettingsViewController : UIViewController <PressSettingButtonDelegate>
+@interface SettingsViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *bitrateLabel;
 @property (strong, nonatomic) IBOutlet UISlider *bitrateSlider;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *framerateSelector;
