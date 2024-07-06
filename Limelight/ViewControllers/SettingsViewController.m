@@ -179,12 +179,25 @@ BOOL isCustomResolution(CGSize res) {
     });
 }
 
+- (void)simulateSettingsButtonPress{
+    [self.mainFrameViewController simulateSettingsButtonPress];
+}
+
+
 - (void)viewDidLoad {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(deviceOrientationDidChange) // handle orientation change since i made portrait mode available
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-
+    _exitSwipeRecognizer = [[CustomEdgeSwipeGestureRecognizer alloc] initWithTarget:self action:@selector(simulateSettingsButtonPress)];
+    _exitSwipeRecognizer.edges = UIRectEdgeLeft | UIRectEdgeRight;
+    _exitSwipeRecognizer.normalizedThresholdDistance = 0;
+    _exitSwipeRecognizer.edgeTolerancePoints = 20;
+    _exitSwipeRecognizer.immediateTriggering = true;
+    _exitSwipeRecognizer.delaysTouchesBegan = YES;
+    _exitSwipeRecognizer.delaysTouchesEnded = YES;
+    [self.view addGestureRecognizer:_exitSwipeRecognizer];
+    
     // Always run settings in dark mode because we want the light fonts
     if (@available(iOS 13.0, tvOS 13.0, *)) {
         self.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
@@ -425,6 +438,7 @@ BOOL isCustomResolution(CGSize res) {
 
 
 - (void)onscreenControlChanged{
+    
     BOOL isIPhone = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone);
     if (isIPhone) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];

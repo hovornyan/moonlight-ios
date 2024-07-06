@@ -27,6 +27,7 @@
 #import "IdManager.h"
 #import "ConnectionHelper.h"
 #import "LocalizationHelper.h"
+#import "CustomEdgeSwipeGestureRecognizer.h"
 
 #if !TARGET_OS_TV
 #import "SettingsViewController.h"
@@ -40,6 +41,7 @@
 
 @implementation MainFrameViewController {
     UILabel* waterMark;
+    CustomEdgeSwipeGestureRecognizer* _exitSwipeRecognizer;
     NSOperationQueue* _opQueue;
     TemporaryHost* _selectedHost;
     BOOL _showHiddenApps;
@@ -872,17 +874,26 @@ static NSMutableSet* hostList;
 }
 
 #if !TARGET_OS_TV
-- (void)simulateSettingsButtonPress { //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
+- (void)simulateSettingsButtonPressOpen { //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
     if (currentPosition == FrontViewPositionLeft && _settingsButton.target && [_settingsButton.target respondsToSelector:_settingsButton.action]) {
         [_settingsButton.target performSelector:_settingsButton.action withObject:_settingsButton];
+    }
+}
+
+- (void)simulateSettingsButtonPress { //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
+    if (_settingsButton.target && [_settingsButton.target respondsToSelector:_settingsButton.action]) {
+        [_settingsButton.target performSelector:_settingsButton.action withObject:_settingsButton];
+        [self.delegate settingButtonPressedInMainFrame];
     }
 }
 
 
 - (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position {
     // If we moved back to the center position, we should save the settings
+    SettingsViewController* settingsViewController = (SettingsViewController*)[revealController rearViewController];
+    settingsViewController.mainFrameViewController = self;
     if (position == FrontViewPositionLeft) {
-        [(SettingsViewController*)[revealController rearViewController] saveSettings];
+        [settingsViewController saveSettings];
         _settingsButton.enabled = YES; // make sure these 2 buttons are enabled after closing setting view.
         _upButton.enabled = YES; // here is the select new host button
     }
@@ -1143,10 +1154,10 @@ static NSMutableSet* hostList;
     
 #if !TARGET_OS_TV
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(simulateSettingsButtonPress) // //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
+                                             selector:@selector(simulateSettingsButtonPressOpen) // //force expand settings view to update resolution table, and all setting includes current fullscreen resolution will be updated.
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil];
-    
+
     [[self revealViewController] setPrimaryViewController:self];
 #endif
     

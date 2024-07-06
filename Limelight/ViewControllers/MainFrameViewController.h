@@ -15,11 +15,20 @@
 #import "AppAssetManager.h"
 #import "SWRevealViewController.h"
 
+
+@protocol PressSettingButtonDelegate <NSObject>
+@required
+- (void)settingButtonPressedInMainFrame;
+@end
+
 @interface MainFrameViewController : UICollectionViewController <DiscoveryCallback, PairCallback, HostCallback, AppCallback, AppAssetCallback, NSURLConnectionDelegate, SWRevealViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsButton;
 #if !TARGET_OS_TV
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *upButton;
+
+@property (nonatomic, weak) id<PressSettingButtonDelegate> delegate;
+-(void)simulateSettingsButtonPress;
 #endif
 
 @end
