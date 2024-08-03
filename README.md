@@ -6,15 +6,24 @@ Game play, general remote desktop application.
  <br>
 
 # 注意事项 Notice
-欢迎公开或非公开的代码合并，但如果觉得这个Fork好用，或对自己有所启发， 请记得点星。不要一声不响地合并或模仿并视为自己的原创。如果能够声明引用这个Fork的改动，我将非常感谢。<br>
-Feel free to merge the code (by mentioning my credits). If you find this fork useful or inspiring, please remember to give it a star.<br><br>
+### 发布基于本Fork的修改版本，请务必申明来源。偷摸合并代码、功能性抄袭将受本人鄙视。 <br>
+### Please acknowledge the source when releasing modified versions based on this fork. Silent code merging and functional plagiarism will be met with disdain.<br><br>
 功能说明清单、最新IPA文件下载，请前往Release页面查看, 本页面不再更新。<br>
-Feature list on this page will not be updated anymore, please check the release page for details and latest IPA download.
+Feature list on this page will not be updated anymore, please check the release page for details and latest IPA download. <br>
+For latest coding commits go to branch `noWaterMark2`.
  <br> <br>
 
-# 为防范抄袭狗Up主 "阿西西的日常" ，最新的代码提交暂未公开<br>
-# To prevent plagiarism by copycat "阿西西的日常 (Axixi's Daily Life)", the latest code submissions are not currently public
-【"阿西西的日常" : 游戏串流界小偷、假大佬、毒瘤up主】 https://b23.tv/Z0ChSiD<br>
+# 特别纪念 Special Note
+## 为防范抄袭狗Up主 "阿西西的日常" , 该仓库曾在 2024年7月期间暂停公开提交代码。<br>
+## To prevent plagiarism by copycat "阿西西的日常 (Axixi's Daily Life)", this repository temporarily suspended public code commits during July 2024.
+
+【阿西西: 我撒谎、偷窃、白嫖，但我是大佬Up主】 
+【 Axixi: I lie, I steal, I cheat, but I'm a big shot uploader 】
+https://b23.tv/9noIx3i
+
+【"阿西西的日常" : 游戏串流界小偷、假大佬、毒瘤up主】 
+【 "Axixi's Daily Life": A thief in the game streaming community, a pretender, and a toxic uploader】 
+https://b23.tv/Z0ChSiD<br>
  <br> <br>
 
 # 视频介绍, A Video illutration in Chinese:<br>
