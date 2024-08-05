@@ -8,7 +8,7 @@ Game play, general remote desktop application.
 # 注意事项 Notice
 ### 发布基于本Fork的修改版本，请务必申明来源。偷摸合并代码、功能性抄袭将受本人鄙视。 <br>
 ### Please acknowledge the source when releasing modified versions based on this fork. Silent code merging and functional plagiarism will be met with disdain.<br><br>
-功能说明清单、最新IPA文件下载，请前往Release页面查看, 本页面不再更新。<br>
+功能说明清单、最新IPA文件下载，请前往Release页面查看, 本页面不再更新。目前的代码提交在`noWaterMark2`分支。<br>
 Feature list on this page will not be updated anymore, please check the release page for details and latest IPA download. <br>
 For latest coding commits go to branch `noWaterMark2`.
  <br> <br>
