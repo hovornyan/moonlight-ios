@@ -13,6 +13,11 @@ Feature list on this page will not be updated anymore, please check the release 
 For latest coding commits go to branch `noWaterMark2`.
  <br> <br>
 
+# 安装 Install
+### 前往Release页下载ipa文件， 或B站关注Up主 `True砖家` 获取TestFlight地址
+### Go to the release page for ipa file, or subscribe `True砖家` on Bilibili for the TestFlight URL.
+ <br> <br>
+
 # 特别纪念 Special Note
 ## 为防范抄袭狗Up主 "阿西西的日常" , 该仓库曾在 2024年7月期间暂停公开提交代码。<br>
 ## To prevent plagiarism by copycat "阿西西的日常 (Axixi's Daily Life)", this repository temporarily suspended public code commits during July 2024.
@@ -29,7 +34,6 @@ https://b23.tv/Z0ChSiD<br>
 # 视频介绍, A Video illutration in Chinese:<br>
 https://www.bilibili.com/video/BV1M1421C7FD
   <br> <br>
-  
 
 # Fork缘由
 
