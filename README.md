@@ -1,8 +1,10 @@
 # Moonlight-ZWM
 
-# 适用范围 Applies to
+# 概述 Overview
 
-Game play, general remote desktop application.
+Developed for: game play, general remote desktop application.
+This fork has developed with too many deviations from the original version (go to the release page for details).  It's almost impossible, and I'm not interested in merging the modifications into the officcial repository.
+
  <br>
 
 # 注意事项 Notice
@@ -20,6 +22,9 @@ https://testflight.apple.com/join/1JDEKywe
 <br>
 
 Or just install ipa in the release page, if you got sideloading methods.
+
+<br><br>
+# 开发者B站号. Developer on Bilibili
 
 如果你有在用Bilibili， 请关注`True砖家`，了解该fork的最新消息。 <br>
 If you are on Bilibili, subscribe `True砖家` to get the latest news of this fork: <br>
