@@ -14,8 +14,12 @@ For latest coding commits go to branch `noWaterMark`.
  <br> <br>
 
 # 安装 Install
-### 前往Release页下载ipa文件， 或B站关注Up主 `True砖家` 获取TestFlight地址
-### Go to the release page for ipa file, or subscribe `True砖家` on Bilibili for the TestFlight URL.
+### 已为Github用户开了一个人数上限100的测试组， 可通过testflight安装：
+### Jut open a testing group with limit of 100 users:
+https://testflight.apple.com/join/1JDEKywe
+
+Or just install ipa in the release page, if you got sideloading methods.
+
  <br> <br>
 
 # 特别纪念 Special Note
