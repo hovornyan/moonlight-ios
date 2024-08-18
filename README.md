@@ -24,7 +24,7 @@ Or just install ipa in the release page, if you got sideloading methods.
 
 # 特别感谢 Special Thanks to:
 https://github.com/King0fSpace/moonlight-ios-CustomOSC
-On screen control customization of my version originated form this repo (with much more improvements)
+<br>On screen control customization of my version originated form this repo (with much more improvements)
 
 
 # 特别纪念 Special Note
