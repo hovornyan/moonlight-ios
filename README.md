@@ -17,8 +17,14 @@ For latest coding commits go to branch `noWaterMark`.
 ### 已为Github用户开了一个人数上限100的测试组， 可通过testflight安装：
 ### Just open a testing group with limit of 100 users:
 https://testflight.apple.com/join/1JDEKywe
+<br>
 
 Or just install ipa in the release page, if you got sideloading methods.
+
+如果你有在用Bilibili， 请关注`True砖家`，了解该fork的最新消息。 <br>
+If you are on Bilibili, subscribe `True砖家` to get the latest news of this fork: <br>
+https://b23.tv/A0F9v7n
+
 
  <br> <br>
 
