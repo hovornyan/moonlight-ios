@@ -3,7 +3,7 @@
 # 概述 Overview
 
 Developed for: game play, general remote desktop application.
-This fork has developed with too many deviations from the original version (go to the release page for details).  It's almost impossible, and I'm not interested in merging the modifications into the officcial repository.
+This fork has developed with `too many deviations` from the original version (go to the release page for details).  It's almost impossible, and I'm not interested in merging the modifications into the official repository.
 
  <br>
 
@@ -19,6 +19,8 @@ For latest coding commits go to branch `noWaterMark`.
 ### 已为Github用户开了一个人数上限100的测试组， 可通过testflight安装：
 ### Just open a testing group with limit of 100 users:
 https://testflight.apple.com/join/1JDEKywe
+### 如果觉得这个fork好用， 请记得点星。
+### Give it a star if you find this version helpful.
 <br>
 
 Or just install ipa in the release page, if you got sideloading methods.
