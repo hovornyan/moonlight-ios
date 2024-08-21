@@ -16,8 +16,8 @@ For latest coding commits go to branch `noWaterMark`.
  <br> <br>
 
 # 安装 Install
-### 已为Github用户开了一个人数上限100的测试组， 可通过testflight安装：
-### Just open a testing group with limit of 100 users:
+### 已为Github用户开测试组， 可通过testflight安装：
+### Just opened a testing group for github users:
 https://testflight.apple.com/join/1JDEKywe
 ### 如果觉得这个fork好用， 请记得点星。
 ### Give it a star if you find this version helpful.
