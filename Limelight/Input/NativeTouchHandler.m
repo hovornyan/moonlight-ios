@@ -12,10 +12,9 @@
 #import "OnScreenControls.h"
 #import "StreamView.h"
 #import "DataManager.h"
+#import "CustomEdgeSlideGestureRecognizer.h"
 
 #include <Limelight.h>
-
-
 
 
 @implementation NativeTouchHandler {
@@ -31,10 +30,6 @@
     NSMutableSet<NSNumber *> *activePointerIds; //pointerId Set for active touches.
     NSMutableSet<NSNumber *> *pointerIdPool; //pre-defined pool of pointerIds.
     NSMutableSet<NSNumber *> *unassignedPointerIds;
-    NSMutableSet<NSNumber *> *excludedPointerIds; // a NSSet of pointerIds of touches that will not be sent to the remote PC for better swipe gesture handling
-    CGFloat slideGestureVerticalThreshold;
-    CGFloat screenWidthWithThreshold;
-    CGFloat EDGE_TOLERANCE;
 }
 
 - (id)initWithView:(StreamView*)view andSettings:(TemporarySettings*)settings{
@@ -50,23 +45,17 @@
         [self->pointerIdPool addObject:@(i)];
     }
     self->activePointerIds = [NSMutableSet set];
-    self->excludedPointerIds = [[NSMutableSet alloc] init];
     
-    EDGE_TOLERANCE = 5.0;
-    slideGestureVerticalThreshold = CGRectGetHeight([[UIScreen mainScreen] bounds]) * 0.4;
-    screenWidthWithThreshold = CGRectGetWidth([[UIScreen mainScreen] bounds]) - EDGE_TOLERANCE;
-
     [NativeTouchPointer setPointerVelocityDivider:settings.pointerVelocityModeDivider.floatValue];
     [NativeTouchPointer setPointerVelocityFactor:settings.touchPointerVelocityFactor.floatValue];
     [NativeTouchPointer initContextWithView:self->streamView];
-    //_touchesCapturedByOnScreenButtons = [[NSMutableSet alloc] init];
     return self;
 }
 
 
 
 // generate & populate pointerId into NSDict & NSSet, called in touchesBegan
-- (void)populatePointerId:(UITouch*)touch{
+- (void)handleTouchDown:(UITouch*)touch{
     //populate pointerId
     uintptr_t memAddrValue = (uintptr_t)touch;
     unassignedPointerIds = [pointerIdPool mutableCopy]; //reset unassignedPointerIds
@@ -74,20 +63,15 @@
     uint8_t pointerId = [[unassignedPointerIds anyObject] unsignedIntValue];
     [pointerIdDict setObject:@(pointerId) forKey:@(memAddrValue)];
     [activePointerIds addObject:@(pointerId)];
-    
-    //check if touch point is spawned on the left or right upper half screen edges, if so we'll populate the excluded pointer id NSSet and not send the touch event to remote PC. this is for better handling in-stream slide gesture
-    CGPoint initialPoint = [touch locationInView:self->streamView];
-    if(initialPoint.y < slideGestureVerticalThreshold && (initialPoint.x < EDGE_TOLERANCE || initialPoint.x > screenWidthWithThreshold)) [excludedPointerIds addObject:@(pointerId)];
 }
 
 // remove pointerId in touchesEnded or touchesCancelled
 - (void)removePointerId:(UITouch*)touch{
     uintptr_t memAddrValue = (uintptr_t)touch;
     NSNumber* pointerIdObj = [pointerIdDict objectForKey:@(memAddrValue)];
-    if(pointerIdObj != nil){
+    if(pointerIdObj != nil){   // THIS WILL prevent CRASH, don't remove
         [activePointerIds removeObject:pointerIdObj];
         [pointerIdDict removeObjectForKey:@(memAddrValue)];
-        if([excludedPointerIds containsObject:pointerIdObj]) [excludedPointerIds removeObject:pointerIdObj]; // remove pointer id from excludedPointerId NSSet
     }
 }
 
@@ -97,14 +81,11 @@
     return [[pointerIdDict objectForKey:@((uintptr_t)touch)] unsignedIntValue];
 }
 
-
 - (void)sendTouchEvent:(UITouch*)touch withTouchtype:(uint8_t)touchType{
     CGPoint targetCoords;
     uint8_t pointerId = [self retrievePointerIdFromDict:touch];
-    NSLog(@"excluded count: %d", (uint32_t)[excludedPointerIds count]);
+    if([CustomEdgeSlideGestureRecognizer validScreenEdgeSwiped]) return; // don't send touch event to the remote PC if it's a slide gesture touch
     if(activateCoordSelector && touch.phase == UITouchPhaseMoved) targetCoords = [NativeTouchPointer selectCoordsFor:touch]; // coordinates of touch pointer replaced to relative ones here.
-    
-    if([excludedPointerIds containsObject:@(pointerId)]) return; // if the pointerId has been excluded by edge check, we're done here. this touch event will not be sent to the remote PC. and this must be checked after coord selector finishes populating new relative coords, or the app will crash!
     else targetCoords = [touch locationInView:streamView];
     CGPoint location = [streamView adjustCoordinatesForVideoArea:targetCoords];
     CGSize videoSize = [streamView getVideoAreaSize];
@@ -118,17 +99,17 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+
     for (UITouch* touch in touches){
         // continue to the next loop if current touch is already captured by OSC. works only in regular native touch
         if(notPureNativeTouchMode && [OnScreenControls.touchAddrsCapturedByOnScreenControls containsObject:@((uintptr_t)touch)]) continue;
-        [self populatePointerId:touch]; //generate & populate pointerId
+        [self handleTouchDown:touch]; //generate & populate pointerId
         if(activateCoordSelector) [NativeTouchPointer populatePointerObjIntoDict:touch];
         [self sendTouchEvent:touch withTouchtype:LI_TOUCH_EVENT_DOWN];
     }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    // NSLog(@"captured by OSB touches: %d", (uint32_t)[OnScreenControls.touchAddrsCapturedByOnScreenControls count]);
     for (UITouch* touch in touches){
         // continue to the next loop if current touch is already captured by OSC. works only in regular native touch
         if(notPureNativeTouchMode && [OnScreenControls.touchAddrsCapturedByOnScreenControls containsObject:@((uintptr_t)touch)]) continue;
@@ -139,12 +120,11 @@
     return;
 }
 
-
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch* touch in touches){
         // continue to the next loop if current touch is already captured by OSC. works only in regular native touch
         if(notPureNativeTouchMode && [OnScreenControls.touchAddrsCapturedByOnScreenControls containsObject:@((uintptr_t)touch)]) continue;
-        [self sendTouchEvent:touch withTouchtype:LI_TOUCH_EVENT_UP]; //send touch event before remove pointerId
+        [self sendTouchEvent:touch withTouchtype:LI_TOUCH_EVENT_UP]; //send touch event before remove pointerId. it's ok to send up event even it's captureed by excluded touches addresses
         [self removePointerId:touch]; //then remove pointerId
         if(activateCoordSelector) [NativeTouchPointer removePointerObjFromDict:touch];
     }
