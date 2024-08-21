@@ -2,30 +2,30 @@
   "sourceLanguage" : "en",
   "strings" : {
     "2Bp-XZ-cCw.text" : {
-      "comment" : "Class = \"UILabel\"; text = \"Larger Sticks & L1/R1 Buttons\"; ObjectID = \"2Bp-XZ-cCw\";",
+      "comment" : "Class = \"UILabel\"; text = \"Larger Sticks & L1/R1 Buttons                                                      \"; ObjectID = \"2Bp-XZ-cCw\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Larger Sticks & L1/R1 Buttons"
+            "value" : "Larger Sticks & L1/R1 Buttons                                                      "
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "更大的摇杆和L1/R1按键"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "更大的摇杆和L1/R1按键"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "更大的摇杆和L1/R1按键"
           }
         }
@@ -1316,61 +1316,61 @@
       }
     },
     "Mm0-xf-9eh.segmentTitles[0]" : {
-      "comment" : "Class = \"UISegmentedControl\"; Mm0-xf-9eh.segmentTitles[0] = \"Left Screen Edge\"; ObjectID = \"Mm0-xf-9eh\";",
+      "comment" : "Class = \"UISegmentedControl\"; Mm0-xf-9eh.segmentTitles[0] = \"Upper Left Screen Edge\"; ObjectID = \"Mm0-xf-9eh\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Left Screen Edge"
+            "value" : "Upper Left Screen Edge"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "左边缘"
+            "value" : "左上边缘"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "左边缘"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "左边缘"
+            "value" : "左上边缘"
           }
         }
       }
     },
     "Mm0-xf-9eh.segmentTitles[1]" : {
-      "comment" : "Class = \"UISegmentedControl\"; Mm0-xf-9eh.segmentTitles[1] = \"Right Screen Edge\"; ObjectID = \"Mm0-xf-9eh\";",
+      "comment" : "Class = \"UISegmentedControl\"; Mm0-xf-9eh.segmentTitles[1] = \"Upper Right Screen Edge\"; ObjectID = \"Mm0-xf-9eh\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Right Screen Edge"
+            "value" : "Upper Right Screen Edge"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "右边缘"
+            "value" : "右上边缘"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "右边缘"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "右边缘"
+            "value" : "右上边缘"
           }
         }
       }
@@ -2234,61 +2234,61 @@
       }
     },
     "yY7-Sf-Zes.segmentTitles[0]" : {
-      "comment" : "Class = \"UISegmentedControl\"; yY7-Sf-Zes.segmentTitles[0] = \"Left Screen Edge\"; ObjectID = \"yY7-Sf-Zes\";",
+      "comment" : "Class = \"UISegmentedControl\"; yY7-Sf-Zes.segmentTitles[0] = \"Upper Left Screen Edge\"; ObjectID = \"yY7-Sf-Zes\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Left Screen Edge"
+            "value" : "Upper Left Screen Edge"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "左边缘"
+            "value" : "左上边缘"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "左边缘"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "左边缘"
+            "value" : "左上边缘"
           }
         }
       }
     },
     "yY7-Sf-Zes.segmentTitles[1]" : {
-      "comment" : "Class = \"UISegmentedControl\"; yY7-Sf-Zes.segmentTitles[1] = \"Right Screen Edge\"; ObjectID = \"yY7-Sf-Zes\";",
+      "comment" : "Class = \"UISegmentedControl\"; yY7-Sf-Zes.segmentTitles[1] = \"Upper Right Screen Edge\"; ObjectID = \"yY7-Sf-Zes\";",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "Right Screen Edge"
+            "value" : "Upper Right Screen Edge"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "右边缘"
+            "value" : "右上边缘"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "右边缘"
           }
         },
         "zh-HK" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "右边缘"
+            "value" : "右上边缘"
           }
         }
       }
