@@ -46,7 +46,7 @@ bool validScreenEdgeSwiped;
             validScreenEdgeSwiped = true;
             capturedUITouch = touch;
             capturedStartPoint = touchDownPoint;
-            self.state = UIGestureRecognizerStatePossible;
+            // self.state = UIGestureRecognizerStatePossible;
         }
     }
     if(self.edges & UIRectEdgeRight){
@@ -54,7 +54,7 @@ bool validScreenEdgeSwiped;
             validScreenEdgeSwiped = true;
             capturedUITouch = touch;
             capturedStartPoint = touchDownPoint;
-            self.state = UIGestureRecognizerStatePossible;
+            // self.state = UIGestureRecognizerStatePossible;
         }
     }
 }
