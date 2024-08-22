@@ -21,9 +21,14 @@ static CGFloat screenWidth;
 static CGFloat screenHeightThreshold;
 bool validScreenEdgeSwiped;
 
-+ (bool) validScreenEdgeSwiped{
-    return validScreenEdgeSwiped;
+
++ (bool)validScreenEdgeSwiped {
+    @synchronized(self) {
+        return validScreenEdgeSwiped;
+    }
 }
+
+
 
 
 - (instancetype)initWithTarget:(nullable id)target action:(nullable SEL)action {
