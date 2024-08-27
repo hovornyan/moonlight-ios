@@ -27,7 +27,7 @@ https://testflight.apple.com/join/1JDEKywe
 # 添加键盘命令 Add Keyboard Command
 ![image](https://github.com/user-attachments/assets/0ea0f91c-574d-4408-9c92-d5a3e229807a)
 <br>Read this instruction:
-[How.to.add.keyboard.command.for.moonlight-iOS.txt](https://github.com/user-attachments/files/16667925/How.to.add.keyboard.command.for.moonlight-iOS.txt)
+[How.to.add.keyboard.command.for.moonlight-iOS](https://b23.tv/fgdRJk8)
 
 <br><br>
 # 开发者B站号. Developer on Bilibili
