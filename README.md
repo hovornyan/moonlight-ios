@@ -15,8 +15,8 @@
 
 # 概述 Overview
 
-该Fork已经严重偏离原版moonlight-iOS。 我已经对一项项拆分修改过的功能， 再合并到官方代码仓库没有兴趣了  <br>
-This fork has developed with `too many deviations` from the original version (go to the release page for details).  It's almost impossible, and I'm not interested in merging the modifications into the official repository.
+#### 该Fork已经严重偏离原版moonlight-iOS。 我已经对一项项拆分修改过的功能提交PR， 再合并到官方代码仓库没有兴趣了  <br>
+#### This fork has developed with `too many deviations` from the original version (go to the release page for details). I am not interested in splitting the modified features to create pull request to the official repository one by one.
 
  <br>
 
