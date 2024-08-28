@@ -1,3 +1,13 @@
+# 安装 Installation
+### 已为Github用户开测试组， 可通过testflight安装：
+### Just opened a testing group for github users：
+### https://testflight.apple.com/join/1JDEKywe
+### 以后大概不会经常发布ipa文件了。 Guess I'm not going to release ipa files frequently..
+### 如果觉得这个fork好用， 请记得点星。
+### Give it a star if you find this version helpful.
+<br>
+
+
 # Moonlight-ZWM
 
 # 概述 Overview
@@ -14,15 +24,6 @@ This fork has developed with `too many deviations` from the original version (go
 Feature list on this page will not be updated anymore, please check the release page for details <br>
 For latest coding commits go to branch `noWaterMark`.
  <br> <br>
-
-# 安装 Install
-### 已为Github用户开测试组， 可通过testflight安装：
-### Just opened a testing group for github users：
-https://testflight.apple.com/join/1JDEKywe
-### 以后大概不会经常发布ipa文件了。 Guess I'm not going to release ipa files frequently..
-### 如果觉得这个fork好用， 请记得点星。
-### Give it a star if you find this version helpful.
-<br>
 
 # 添加键盘命令 Add Keyboard Command
 ![image](https://github.com/user-attachments/assets/0ea0f91c-574d-4408-9c92-d5a3e229807a)
