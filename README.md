@@ -4,6 +4,7 @@
 ### https://apps.apple.com/us/app/moonlight-zwm/id6590630545
 ### Feel free to install & rate the app ~
 ### 中国大陆用户如果不便将apple id切到外区， 不妨先加入TestFlight. 等我搞定icp备案号才能上架国区App Store.
+### 功能更新会先上TestFlight， 再视情况更新App Store版本
 
 <br>
 
