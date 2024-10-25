@@ -1,3 +1,9 @@
+# 代码 Coding
+### 代码提交在`noWaterMark`分支。
+### For latest coding commits, go to branch `noWaterMark`.
+
+ <br>
+
 # 安装 Installation
 
 ### Available on App Store, just search "moonlight zwm"
@@ -8,17 +14,11 @@
 
 <br>
 
-### 已为Github用户开测试组， 可通过testflight安装：
+### 已为Github用户开了一个测试组， 可通过testflight安装：
 ### Just opened a testing group for github users：
 ### https://testflight.apple.com/join/1JDEKywe
 ### 如果觉得这个fork好用， 请记得点星。
 ### Give it a star if you find this version helpful.
-
- <br>
-
-# 代码 Coding
-### 代码提交在`noWaterMark`分支。
-### For latest coding commits go to branch `noWaterMark`.
 
  <br>
 
