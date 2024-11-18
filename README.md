@@ -2,19 +2,6 @@
 ### 代码提交在`noWaterMark`分支。
 ### For latest coding commits, go to branch `noWaterMark`.
 
- <br>
-
-# 贡献者 Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
   <br>
 
 # 安装 Installation
