@@ -220,7 +220,7 @@
 		FB1D59961BBCCB6400F482CA /* ComputerScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComputerScrollView.m; sourceTree = "<group>"; };
 		FB1D59981BBCCD7E00F482CA /* AppCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppCollectionView.h; sourceTree = "<group>"; };
 		FB1D59991BBCCD7E00F482CA /* AppCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppCollectionView.m; sourceTree = "<group>"; };
-		FB290CEE19B2C406004C83CF /* Moonlight-ZWM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moonlight-ZWM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB290CEE19B2C406004C83CF /* Moonlight-HVR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moonlight-HVR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB290CF119B2C406004C83CF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FB290CF319B2C406004C83CF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		FB290CF519B2C406004C83CF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -508,7 +508,7 @@
 		FB290CEF19B2C406004C83CF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FB290CEE19B2C406004C83CF /* Moonlight-ZWM.app */,
+				FB290CEE19B2C406004C83CF /* Moonlight-HVR.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -913,9 +913,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FB290CED19B2C406004C83CF /* Moonlight-ZWM */ = {
+		FB290CED19B2C406004C83CF /* Moonlight-HVR */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FB290D2019B2C406004C83CF /* Build configuration list for PBXNativeTarget "Moonlight-ZWM" */;
+			buildConfigurationList = FB290D2019B2C406004C83CF /* Build configuration list for PBXNativeTarget "Moonlight-HVR" */;
 			buildPhases = (
 				FB290CEA19B2C406004C83CF /* Sources */,
 				FB290CEB19B2C406004C83CF /* Frameworks */,
@@ -926,9 +926,9 @@
 			dependencies = (
 				98AB2E861CAD468B0089BB98 /* PBXTargetDependency */,
 			);
-			name = "Moonlight-ZWM";
+			name = "Moonlight-HVR";
 			productName = Limelight;
-			productReference = FB290CEE19B2C406004C83CF /* Moonlight-ZWM.app */;
+			productReference = FB290CEE19B2C406004C83CF /* Moonlight-HVR.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -968,7 +968,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				FB290CED19B2C406004C83CF /* Moonlight-ZWM */,
+				FB290CED19B2C406004C83CF /* Moonlight-HVR */,
 			);
 		};
 /* End PBXProject section */
@@ -1247,7 +1247,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = FRL23UV4N9;
+				DEVELOPMENT_TEAM = 7JJ556UL7V;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Limelight/Limelight-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1264,7 +1264,7 @@
 					"$(PROJECT_DIR)/Limelight/Database",
 				);
 				INFOPLIST_FILE = "Limelight/Limelight-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MoonlightZWM;
+				INFOPLIST_KEY_CFBundleDisplayName = "Moonlight HVR";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1283,7 +1283,7 @@
 					"$(PROJECT_DIR)/libs/FFmpeg/lib/iOS-Sim",
 				);
 				MARKETING_VERSION = 9.0.263;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.moonlight-trzj2.iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moonlight-hvr.iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1305,7 +1305,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = FRL23UV4N9;
+				DEVELOPMENT_TEAM = 7JJ556UL7V;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Limelight/Limelight-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1322,7 +1322,7 @@
 					"$(PROJECT_DIR)/Limelight/Database",
 				);
 				INFOPLIST_FILE = "Limelight/Limelight-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = MoonlightZWM;
+				INFOPLIST_KEY_CFBundleDisplayName = "Moonlight HVR";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1341,7 +1341,7 @@
 					"$(PROJECT_DIR)/libs/FFmpeg/lib/iOS-Sim",
 				);
 				MARKETING_VERSION = 9.0.263;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.moonlight-zwm-updated.iPadOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.moonlight-hvr-updated.iPadOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = NO;
@@ -1367,7 +1367,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FB290D2019B2C406004C83CF /* Build configuration list for PBXNativeTarget "Moonlight-ZWM" */ = {
+		FB290D2019B2C406004C83CF /* Build configuration list for PBXNativeTarget "Moonlight-HVR" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB290D2119B2C406004C83CF /* Debug */,
