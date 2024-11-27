@@ -26,6 +26,8 @@
 # include <openssl/opensslconf.h>
 # include <openssl/cryptoerr.h>
 
+# include <sys/_types/_time_t.h>
+
 # ifdef CHARSET_EBCDIC
 #  include <openssl/ebcdic.h>
 # endif
